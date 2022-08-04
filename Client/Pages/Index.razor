@@ -1,0 +1,35 @@
+﻿@page "/"
+
+<PageTitle>Store</PageTitle>
+
+<h1>Store</h1>
+<hr class="mb-5" />
+
+@if (_productChunksOf4 is not null)
+{
+    foreach (var chunkedProducts in _productChunksOf4)
+    {
+        <div class="row mb-5">
+            @foreach (var product in chunkedProducts)
+            {
+                <div class="col-sm-3 mb-5 mb-sm-0">
+                    <div class="card" style="width: 18rem;">
+                        <img src="@product.ImageUrl" class="card-img-top">
+                        <div class="card-body">
+                            <h5 class="card-title fw-bold">@product.Title</h5>
+                            <p class="card-text">@product.Description</p>
+                            <h5 class="mb-4"><strong>$@(product.Price / 100)</strong></h5>
+                            <button @onclick="() => OnClickBtnBuyNowAsync(product)" class="btn btn-dark btn-lg d-block">BUY NOW</button>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+}
+else
+{
+    <div class="spinner-border" role="status">
+        <span class="visually-hidden">Loading...</span>
+    </div>
+}
